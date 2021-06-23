@@ -89,6 +89,7 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
     private void execSQLite(String sql) {
         SQLiteDatabase db = this.getWritableDatabase();
         try {
+            Log.e("Sang","query: "+ sql);
             db.execSQL(sql);
         } catch (Exception e) {
             Log.e("SQLITE", e.toString());
@@ -163,7 +164,7 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public List<SinhVien> getAllStudentByName() {
-        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " WHERE name= Nam";
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " WHERE name ='Nam'";
         List<SinhVien> listStudent = getListSV(selectQuery);
         return listStudent;
     }
@@ -177,7 +178,7 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
     public List<SinhVien> getSVByLop(int idLop) {
         String selectQuery = "SELECT DANGKY.id, SinhVien.name, SinhVien.nam, SinhVien.quequan, SinhVien.namhoc from DANGKY " +
                 "INNER JOIN SinhVien ON DANGKY.id = SinhVien.id " +
-                "WHERE id = " + idLop + ";";
+                "WHERE idLOP = " + idLop + ";";
 //        String selectQuery = "SELECT  * FROM " + TABLE_LOP;n
         List<SinhVien> list = getListSV(selectQuery);
         return list;

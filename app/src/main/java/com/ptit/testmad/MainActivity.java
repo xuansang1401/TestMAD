@@ -53,13 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-    public void setTitleActivity(String title){
-        getSupportActionBar().setTitle(title);
-    }
-    @SuppressLint("ShowToast")
-    public void showToast(String s){
-        Toast.makeText(this,s, Toast.LENGTH_LONG).show();
-    }
+
     public void addLopFragment() {
         LopFragment fragment = new LopFragment(databaseHelper, this);
         getSupportFragmentManager().beginTransaction()
@@ -95,5 +89,13 @@ public class MainActivity extends AppCompatActivity {
                 .addToBackStack(null)
                 .commit();
     }
-//    FragmentDKSV
+
+
+    public void setTitleActivity(String title){
+        getSupportActionBar().setTitle(title);
+    }
+    @SuppressLint("ShowToast")
+    public void showToast(String s){
+        Toast.makeText(this,s, Toast.LENGTH_LONG).show();
+    }
 }

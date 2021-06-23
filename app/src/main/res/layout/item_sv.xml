@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <LinearLayout
+        android:background="@color/grey_200"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:weightSum="3"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:paddingStart="8dp"
+            android:paddingEnd="4dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/tv_ten"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Dox XUan Snag"
+                android:gravity="center_vertical"
+                android:textColor="@color/purple_700"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_quequann"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+
+                android:gravity="center_vertical"
+                android:text="Dox XUan Snag"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/tv_namsinh"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="1899"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_namhoc"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:text="Name hocj"
+                android:textColor="@color/purple_700"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+</layout>

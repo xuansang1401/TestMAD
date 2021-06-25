@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:orientation="vertical"
+    android:background="@color/grey_200"
+    android:layout_height="80dp">
+
+    <TextView
+        android:id="@+id/tv_ten_lop"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:text="Ten"
+        android:textSize="16sp"
+        android:textColor="@color/purple_700"
+        android:gravity="center"
+        />
+    <TextView
+        android:id="@+id/tv_mota"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Ten"
+        android:gravity="center"
+        android:textSize="14sp"
+        />
+</LinearLayout>

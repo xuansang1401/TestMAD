@@ -18,7 +18,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="0dp"
         android:gravity="center"
-        android:text="Thêm sinh viên"
+        android:text="Thêm giang vien"
         android:textColor="@color/purple_700"
         android:textSize="20sp" />
 
@@ -37,13 +37,10 @@
         android:layout_marginTop="80dp"
         android:layout_marginEnd="16dp" />
 
-    <EditText
-        android:id="@+id/ed_nam_sinh"
-        android:inputType="number"
+    <Spinner
+        android:id="@+id/sp_trinh_do"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Năm sinh"
-        app:hintEnabled="true"
         android:textColorHint="@color/purple_700"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -56,11 +53,11 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Quê quán"
-        android:id="@+id/ed_que_quan"
+        android:hint="So nam kinh nghiem"
+        android:id="@+id/ed_kn"
 
         app:hintEnabled="true"
-        android:inputType="text"
+        android:inputType="number"
         android:textColorHint="@color/purple_700"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -70,21 +67,21 @@
         android:layout_marginEnd="16dp"
          />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Năm học từ 1 đến 4"
-        app:hintEnabled="true"
-        android:inputType="number"
-        android:id="@+id/ed_nam_hoc"
-        android:textColorHint="@color/purple_700"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="320dp"
-        android:layout_marginEnd="16dp"
-        />
+<!--    <EditText-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Năm học từ 1 đến 4"-->
+<!--        app:hintEnabled="true"-->
+<!--        android:inputType="number"-->
+<!--        android:id="@+id/ed_nam_hoc"-->
+<!--        android:textColorHint="@color/purple_700"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginTop="320dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        />-->
 
     <Button
         android:layout_width="wrap_content"
@@ -97,7 +94,7 @@
         android:layout_marginEnd="40dp"
         android:id="@+id/btn_add_sv"
 
-        android:text="Them sinh vien" />
+        android:text="Them giang vien" />
 
     <Button
         android:layout_width="wrap_content"
@@ -110,7 +107,7 @@
         android:layout_marginEnd="40dp"
         android:id="@+id/btn_dssv"
 
-        android:text="Danh sach sinh viên" />
+        android:text="Danh sach giang vien" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -122,7 +119,7 @@
         android:layout_marginEnd="40dp"
         android:id="@+id/btn_loc"
 
-        android:text="Loc sinh viên" />
+        android:text="Loc giang vien" />
 
 
 </RelativeLayout>

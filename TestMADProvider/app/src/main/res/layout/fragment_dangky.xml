@@ -9,7 +9,7 @@
    >
 
     <Spinner
-        android:id="@+id/spinner_sv"
+        android:id="@+id/spinner_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -20,7 +20,7 @@
         android:layout_marginEnd="8dp" />
 
     <Spinner
-        android:id="@+id/spinner_lop"
+        android:id="@+id/spinner_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -44,14 +44,12 @@
         android:textColor="@color/purple_700"
         android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/ed_kihoc"
+    <TextView
+        android:id="@+id/ed_kn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Kì học"
-        android:inputType="number"
-        app:hintEnabled="true"
-        android:textColorHint="@color/purple_700"
+        android:layout_height="48dp"
+        android:textSize="16sp"
+        android:textColor="@color/purple_700"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -59,21 +57,21 @@
         android:layout_marginTop="240dp"
         android:layout_marginEnd="16dp" />
 
-    <EditText
-        android:id="@+id/ed_stc"
-        android:inputType="number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Số tín chỉ"
-        app:hintEnabled="true"
-        android:textColorHint="@color/purple_700"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="320dp"
-        android:layout_marginEnd="16dp"
-        />
+<!--    <EditText-->
+<!--        android:id="@+id/ed_stc"-->
+<!--        android:inputType="number"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Số tín chỉ"-->
+<!--        app:hintEnabled="true"-->
+<!--        android:textColorHint="@color/purple_700"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginTop="320dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        />-->
 
     <Button
         android:layout_width="wrap_content"

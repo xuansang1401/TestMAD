@@ -1,24 +1,21 @@
 package com.ptit.testmad.view;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+
 import com.ptit.testmad.MainActivity;
 import com.ptit.testmad.databinding.FragmentMainBinding;
-import com.ptit.testmad.db.DatabaseHelper;
+
 
 public class MainFragment extends Fragment {
 
     private FragmentMainBinding binding;
-    private DatabaseHelper databaseHelper;
     private MainActivity mainActivity;
-    public MainFragment(DatabaseHelper databaseHelper, MainActivity mainActivity) {
-        this.databaseHelper=databaseHelper;
+    public MainFragment( MainActivity mainActivity) {
         this.mainActivity=mainActivity;
     }
 
@@ -26,18 +23,19 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding=FragmentMainBinding.inflate(inflater,container,false);
+        mainActivity.setTitleActivity("Trang chu");
         initButton();
         return binding.getRoot();
     }
 
     private void initButton() {
-        binding.addSv.setOnClickListener(view->{
+        binding.btn1.setOnClickListener(view->{
             mainActivity.addSinhVienFragment();
         });
-        binding.addLop.setOnClickListener(view->{
+        binding.btn2.setOnClickListener(view->{
             mainActivity.addLopFragment();
         });
-        binding.btnDangky.setOnClickListener(view->{
+        binding.btn3.setOnClickListener(view->{
             mainActivity.addDangKyFragment();
         });
     }

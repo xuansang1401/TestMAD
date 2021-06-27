@@ -1,5 +1,6 @@
 package com.ptit.testmad.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,34 +8,44 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.ptit.testmad.model.DangKi;
-import com.ptit.testmad.model.Lop;
-import com.ptit.testmad.model.SinhVien;
+import com.ptit.testmad.model.B17DCCN527_DangKi;
+import com.ptit.testmad.model.B17DCCN528_ChuyenMon;
+import com.ptit.testmad.model.B17DCCN528_GiangVien;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public final class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "MADSQL";
-    // bảng sinhh vien
-    public static final String TABLE_NAME = "SinhVien";
-    private static final String IDSV = "id";
-    private static final String NAME = "name";
-    private static final String NAM = "nam";
-    private static final String QUEQUAN = "quequan";
-    private static final String NAMHOC = "namhoc";
+    public static final String DATABASE_NAME = "DOXUANSANG_QUANLY";
+    static final String ID = "id";
+    public static final String TABLE_1 = "GiangVien";
+    static final String COL1_1 = "ten";
+    static final String COL1_2 = "trinhDo";
+    static final String COL1_3 = "soNamKN";
 
-    // bang lop
-    private static final String TABLE_LOP = "LOP";
-    private static final String IDLOP = "idLOP";
-    private static final String TENLOP = "tenlop";
-    private static final String MOTALOP = "mota";
-    // bảng dang ki
-    private static final String TABLE_DKI = "DANGKY";
-    private static final String IDDK = "idDK";
-    private static final String KIHOC = "kihoc";
-    private static final String STC = "stc";
+    static final String TABLE_2 = "ChuyenMon";
+    static final String COL2_1 = "tenf";
+    static final String COL2_2 = "moTa";
+
+     static final String TABLE_3 = "DangKi";
+     static final String COL3_1 = "idGV";
+     static final String COL3_2 = "idCM";
+     static final String COL3_3 = "soNamKn";
+
+     static final String T1C0 = TABLE_1+"."+ID;
+     static final String T1C1 = TABLE_1+"."+COL1_1;
+     static final String T1C2 = TABLE_1+"."+COL1_2;
+     static final String T1C3 = TABLE_1+"."+COL1_3;
+
+     static final String T2C0 = TABLE_2+"."+ID;
+     static final String T2C1 = TABLE_2+"."+COL2_1;
+     static final String T2C2 = TABLE_2+"."+COL2_2;
+
+     static final String T3C1 = TABLE_3+"."+COL3_1;
+     static final String T3C2 = TABLE_3+"."+COL3_2;
+
+
     private Context context;
 
     public DatabaseHelper(Context context) {
@@ -48,43 +59,36 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
 
-        String sqlQuery1 = "CREATE TABLE " + TABLE_NAME + " (" +
-                IDSV + " integer primary key AUTOINCREMENT, " +
-                NAME + " TEXT, " +
-                NAM + " integer, " +
-                QUEQUAN + " TEXT, " +
-                NAMHOC + " integer)";
+        String sqlQuery1 = "CREATE TABLE " + TABLE_1 + " (" +
+                ID + " integer primary key AUTOINCREMENT, " +
+                COL1_1 + " TEXT, " +
+                COL1_2 + " TEXT, " +
+                COL1_3 + " integer)";
         db.execSQL(sqlQuery1);
         Toast.makeText(context, "Create Database successfully", Toast.LENGTH_SHORT).show();
-        String sqlQuery2 = "CREATE TABLE " + TABLE_LOP + " (" +
-                IDLOP + " integer primary key AUTOINCREMENT, " +
-                TENLOP + " TEXT, " +
-                MOTALOP + " TEXT)";
+        String sqlQuery2 = "CREATE TABLE " + TABLE_2 + " (" +
+                ID + " integer primary key AUTOINCREMENT, " +
+                COL2_1 + " TEXT, " +
+                COL2_2 + " TEXT)";
 
         db.execSQL(sqlQuery2);
 
-        String sqlQuery3 = "CREATE TABLE " + TABLE_DKI + " (" +
-                IDDK + " integer primary key AUTOINCREMENT, " +
-                IDSV + " integer, " +
-                IDLOP + " integer, " +
-                KIHOC + " integer, " +
-                STC + " integer)";
+        String sqlQuery3 = "CREATE TABLE " + TABLE_3 + " (" +
+                ID + " integer primary key AUTOINCREMENT, " +
+                COL3_1 + " integer, " +
+                COL3_2 + " integer, " +
+                COL3_3 + " integer)";
         db.execSQL(sqlQuery3);
 
     }
 
-
-    public SQLiteDatabase getDB(){
-        return getWritableDatabase();
-    }
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_1);
         onCreate(db);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_LOP);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_2);
         onCreate(db);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DKI);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_3);
         onCreate(db);
         Toast.makeText(context, "Drop successfully", Toast.LENGTH_SHORT).show();
 
@@ -93,7 +97,7 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
     private void execSQLite(String sql) {
         SQLiteDatabase db = this.getWritableDatabase();
         try {
-            Log.e("Sang","query: "+ sql);
+            Log.e("Sang", "query: " + sql);
             db.execSQL(sql);
         } catch (Exception e) {
             Log.e("SQLITE", e.toString());
@@ -101,100 +105,82 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    private List<SinhVien> getListSV(String sql) {
-        List<SinhVien> listStudent = new ArrayList<SinhVien>();
-        SQLiteDatabase db = this.getWritableDatabase();
+    public List<B17DCCN528_GiangVien> getListTable1(Cursor cursor) {
+        List<B17DCCN528_GiangVien> listStudent = new ArrayList<B17DCCN528_GiangVien>();
 
-        Cursor cursor = db.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
             do {
-                SinhVien student = new SinhVien();
+                B17DCCN528_GiangVien student = new B17DCCN528_GiangVien();
                 student.setId(cursor.getInt(0));
                 student.setTen(cursor.getString(1));
-                student.setNam(cursor.getInt(2));
-                student.setQuequan(cursor.getString(3));
-                student.setNamhoc(cursor.getInt(4));
+                student.setTrinhDo(cursor.getString(2));
+                student.setSoNamKN(cursor.getInt(3));
                 listStudent.add(student);
             } while (cursor.moveToNext());
         }
         cursor.close();
-        db.close();
         return listStudent;
     }
 
-    private List<Lop> getListLop(String selectQuery) {
-        List<Lop> list = new ArrayList<>();
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        Cursor cursor = db.rawQuery(selectQuery, null);
+    public List<B17DCCN528_ChuyenMon> getListTable2(Cursor cursor) {
+        List<B17DCCN528_ChuyenMon> list = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
             do {
-                Lop lop = new Lop();
-                lop.setIdLop(cursor.getInt(0));
-                lop.setTenLop(cursor.getString(1));
+                B17DCCN528_ChuyenMon lop = new B17DCCN528_ChuyenMon();
+                lop.setId(cursor.getInt(0));
+                lop.setTen(cursor.getString(1));
                 lop.setMoTa(cursor.getString(2));
 
                 list.add(lop);
             } while (cursor.moveToNext());
         }
         cursor.close();
-        db.close();
+
         return list;
     }
 
-    public void addSinhVien(SinhVien sinhVien) {
+    public ContentValues addTable1(B17DCCN528_GiangVien data) {
+            ContentValues values = new ContentValues();
+//            values.put(ID, data.getId());
+            values.put(COL1_1, data.getTen());
+            values.put(COL1_2, data.getTrinhDo());
+            values.put(COL1_3, data.getSoNamKN());
 
+            //Neu de null thi khi value bang null thi loi
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        try {
-//            Log.e("Sang","query: "+ sql);
-            String query = "INSERT INTO SinhVien (name,nam,quequan,namhoc)\n" +
-                    "VALUES ('" + sinhVien.getTen() + "' , '" + sinhVien.getNam() +
-                    "' , '" + sinhVien.getQuequan() + "' , '" + sinhVien.getNamhoc() + "');";
-            db.execSQL(query);
-        } catch (Exception e) {
-            Log.e("SQLITE", e.toString());
-        }
-        db.close();
-//        execSQLite(query);
+        return values;
 
     }
 
     public void deleteSV(int id) {
-        String query = "DELETE FROM SinhVien WHERE id = " + id + ";";
+        String query = "DELETE FROM "+TABLE_1+" WHERE id = " + id + ";";
         execSQLite(query);
     }
 
-    public List<SinhVien> getAllStudent() {
-        String selectQuery = "SELECT  * FROM SinhVien" ;
-        List<SinhVien> listStudent = getListSV(selectQuery);
-        return listStudent;
+    public String getAllTable1() {
+        String selectQuery = "SELECT  * FROM "+ TABLE_1;
+        return selectQuery;
     }
 
-    public List<SinhVien> getAllStudentByName() {
-        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " WHERE name ='Nam' ";
-        List<SinhVien> listStudent = getListSV(selectQuery);
-        return listStudent;
-    }
+//    public List<B17DCCN528_GiangVien> getAllStudentByName() {
+//        String selectQuery = "SELECT  * FROM " + TABLE_1 + " WHERE "+COL1_3+" >5 ";
+//        List<B17DCCN528_GiangVien> listStudent = getListTable1(selectQuery);
+//        return listStudent;
+//    }
 
-//    private static final String TABLE_NAME = "SinhVien";
-//    private static final String IDSV = "id";
-//    private static final String NAME = "name";
-//    private static final String NAM = "nam";
-//    private static final String QUEQUAN = "quequan";
-//    private static final String NAMHOC = "namhoc";
-    public List<SinhVien> getSVByLop(int idLop) {
-        String selectQuery = "SELECT DANGKY.id, SinhVien.name, SinhVien.nam, SinhVien.quequan, SinhVien.namhoc from DANGKY " +
-                "INNER JOIN SinhVien ON DANGKY.id = SinhVien.id " +
-                "WHERE idLOP = " + idLop +  ";";
-        List<SinhVien> list = getListSV(selectQuery);
-        return list;
+    public String getGVByCM(int id) {
+        String selectQuery = "SELECT "+T3C1+", "+T1C1+", "+T1C2+", "+T1C3+"" +
+                " from "+TABLE_3+
+                " INNER JOIN "+TABLE_1+" ON "+T3C1+" = "+T1C0 +
+                " WHERE "+T3C2+" = " + id + ";";
+
+        return selectQuery;
 
     }
+
     public int getStudentsCount() {
-        String countQuery = "SELECT  * FROM " + TABLE_NAME;
+        String countQuery = "SELECT  * FROM " + TABLE_1;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         cursor.close();
@@ -204,54 +190,54 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public void addLop(Lop lop) {
-        String query = "INSERT INTO LOP (tenlop,mota)\n" +
-                "VALUES ('" + lop.getTenLop() + "', '" + lop.getMoTa() + "' );";
-        execSQLite(query);
+    public ContentValues addTable2(B17DCCN528_ChuyenMon data) {
+            ContentValues values = new ContentValues();
+//            values.put(ID, data.getId());
+            values.put(COL2_1, data.getTen());
+            values.put(COL2_2, data.getMoTa());
+        return values;
     }
 
 
-    public List<Lop> getAllLop() {
-        String selectQuery = "SELECT  * FROM " + TABLE_LOP;
-        List<Lop> list = getListLop(selectQuery);
-        return list;
+    public String getAllTable2() {
+        String selectQuery = "SELECT  * FROM " + TABLE_2;
+
+        return selectQuery;
     }
 
-    public List<Lop> getAllLopByName() {
-        String selectQuery = "SELECT  * FROM " + TABLE_LOP +" WHERE tenLop= 'toan'; ";
-        List<Lop> list = getListLop(selectQuery);
-        return list;
-    }
-    public void addDangKy(DangKi dangKi) {
-        String query = "INSERT INTO DANGKY (id,idLop,kihoc,stc)\n" +
-                "VALUES ('" + dangKi.getIdSV() + "'" +
-                ", '" + dangKi.getIdLop() + "', '" + dangKi.getKihoc() + "', '" + dangKi.getStc() + "');";
-        execSQLite(query);
+//    public List<B17DCCN528_ChuyenMon> getAllLopByName() {
+//        String selectQuery = "SELECT  * FROM " + TABLE_2 + " WHERE ten= 'toan'; ";
+//        List<B17DCCN528_ChuyenMon> list = getListTable2(selectQuery);
+//        return list;
+//    }
+
+    public ContentValues addTable3(B17DCCN527_DangKi data) {
+            ContentValues values = new ContentValues();
+//            values.put(ID, data.getId());
+            values.put(COL3_1, data.getIdGV());
+            values.put(COL3_2, data.getIdCM());
+            values.put(COL3_3, data.getSoNamKn());
+        return values;
+
     }
 
-    public List<Lop> getAllLopByIdSV(int idSV) {
+    public String getAllLopByIdSV(int id) {
         // Select All Query
-        String selectQuery = "SELECT DANGKY.idLOP, LOP.tenlop, LOP.mota from DANGKY " +
-                "INNER JOIN LOP ON LOP.idLOP = DANGKY.idLOP " +
-                "WHERE id = " + idSV + ";";
+
+        String selectQuery = "SELECT "+T3C2+", "+T2C1+", "+T2C2+" from "+TABLE_3+
+                " INNER JOIN "+TABLE_2+" ON "+T2C0+" = "+T3C2+
+                " WHERE "+T3C1+" = " + id + ";";
 //        String selectQuery = "SELECT  * FROM " + TABLE_LOP;
-        List<Lop> list = getListLop(selectQuery);
-        return list;
+        return selectQuery;
     }
 
 
-    public boolean checkDangKy(int idLop, int idSV) {
-        String selectQuery = "SELECT  * FROM " + TABLE_DKI + " WHERE idLOP= " + idLop + " AND id= " + idSV + ";";
-        SQLiteDatabase db = this.getWritableDatabase();
+    public String checkDangKy(int id1, int id2) {
+        String selectQuery = "SELECT  * FROM " + TABLE_3 +
+                " WHERE "+COL3_1+"= " + id1 + " AND "+COL3_2+"= " + id2 + ";";
         Log.e("Sang", "chek: " + selectQuery);
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        int i = cursor.getCount();
-        if (i > 0) {
-            return true;
-        }
-        return false;
+        return selectQuery;
     }
-
-
-
 }
+
+

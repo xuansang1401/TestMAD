@@ -4,14 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
-import android.content.ContentResolver;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.ptit.testmad.db.DatabaseHelper;
-import com.ptit.testmad.model.Lop;
-import com.ptit.testmad.model.SinhVien;
+import com.ptit.testmad.model.B17DCCN528_ChuyenMon;
+import com.ptit.testmad.model.B17DCCN528_GiangVien;
 import com.ptit.testmad.view.AddSVFragment;
 import com.ptit.testmad.view.DKLopFragment;
 import com.ptit.testmad.view.DSLopFragment;
@@ -23,39 +21,33 @@ import com.ptit.testmad.view.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DatabaseHelper databaseHelper;
 
+    private DatabaseHelper databaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         databaseHelper= new DatabaseHelper(this);
         addMainFragment();
-        setTitleActivity("Trang chủ");
-
-//        ContentResolver contentResolver=getContentResolver();
-
     }
 
-    //1 activity nh fragment do ac quan ly
     private void addMainFragment() {
-        MainFragment mainFragment = new MainFragment(databaseHelper, this);
+        MainFragment mainFragment = new MainFragment(this);
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment, mainFragment, mainFragment.getTag())
                 .commit();
     }
 
     public void addSinhVienFragment() {
-        AddSVFragment fragment = new AddSVFragment(getContentResolver(), this);
+        AddSVFragment fragment = new AddSVFragment(databaseHelper, this);
         replaceFragment(fragment);
     }
 
     public void addDSSVFragment(int status) {
-        DSSVFragment fragment = new DSSVFragment(getContentResolver(), this, status);
+        DSSVFragment fragment = new DSSVFragment(databaseHelper, this, status);
 
         replaceFragment(fragment);
     }
-
     public void addLopFragment() {
         LopFragment fragment = new LopFragment(databaseHelper, this);
         replaceFragment(fragment);
@@ -72,12 +64,12 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(fragment);
     }
 
-    public void addDKLopFragment(SinhVien sinhVien) {
+    public void addDKLopFragment(B17DCCN528_GiangVien sinhVien) {
         DKLopFragment fragment = new DKLopFragment(databaseHelper, this,sinhVien);
         replaceFragment(fragment);
     }
 
-    public void addDKSVFragment(Lop lop) {
+    public void addDKSVFragment(B17DCCN528_ChuyenMon lop) {
         FragmentDKSV fragment = new FragmentDKSV(databaseHelper, this,lop);
         replaceFragment(fragment);
     }

@@ -1,5 +1,7 @@
 package com.ptit.testmad.view;
 
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,13 +10,13 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+
 import com.ptit.testmad.MainActivity;
 import com.ptit.testmad.adapter.LopAdapter;
-import com.ptit.testmad.adapter.SinhVienAdapter;
 import com.ptit.testmad.databinding.DsLopFrgamentBinding;
 import com.ptit.testmad.db.DatabaseHelper;
-import com.ptit.testmad.model.Lop;
-import com.ptit.testmad.model.SinhVien;
+import com.ptit.testmad.db.SinhVienProvider;
+import com.ptit.testmad.model.B17DCCN528_ChuyenMon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,13 +44,14 @@ public class DSLopFragment extends Fragment implements LopAdapter.AdapterLopCall
     }
 
     private void initView() {
-        List<Lop> list=new ArrayList<>();
-        if (status==1){
-            list= databaseHelper.getAllLop();
-        }else {
-            list=databaseHelper.getAllLopByName();
-        }
 
+        Cursor c=null;
+        if (status==1){
+            c=getContext().getContentResolver().query(Uri.parse(SinhVienProvider.URI2),null, databaseHelper.getAllTable2(), null,null);
+        }else {
+            c=getContext().getContentResolver().query(Uri.parse(SinhVienProvider.URI2),null, databaseHelper.getAllTable2(), null,null);
+        }
+        List<B17DCCN528_ChuyenMon> list=databaseHelper.getListTable2(c);
         if (list.isEmpty()){
             return;
         }
@@ -57,7 +60,7 @@ public class DSLopFragment extends Fragment implements LopAdapter.AdapterLopCall
     }
 
     @Override
-    public void setOnClickItem(View view, Lop lop) {
+    public void setOnClickItem(View view, B17DCCN528_ChuyenMon lop) {
         mainActivity.addDKSVFragment(lop);
     }
 }

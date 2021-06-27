@@ -7,21 +7,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.ptit.testmad.R;
-import com.ptit.testmad.model.SinhVien;
+import com.ptit.testmad.model.B17DCCN528_GiangVien;
 
 import java.util.List;
 
 public class SinhVienAdapter extends RecyclerView.Adapter<SinhVienAdapter.MyViewHolder> {
     private Context context;
-    private List<SinhVien> list;
+    private List<B17DCCN528_GiangVien> list;
     AdapterCallBack callBack;
 
-    public SinhVienAdapter(List<SinhVien> list, Context context, AdapterCallBack callBack) {
+    public SinhVienAdapter(List<B17DCCN528_GiangVien> list, Context context, AdapterCallBack callBack) {
         this.context = context;
         this.list = list;
         this.callBack=callBack;
@@ -38,7 +37,7 @@ public class SinhVienAdapter extends RecyclerView.Adapter<SinhVienAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         //load dữ liệu vào item
-        SinhVien sinhVien = list.get(position);
+        B17DCCN528_GiangVien sinhVien = list.get(position);
         initView(sinhVien, holder);
         holder.itemView.setOnClickListener(view ->{
             callBack.setOnClickItem(view, sinhVien);
@@ -46,11 +45,11 @@ public class SinhVienAdapter extends RecyclerView.Adapter<SinhVienAdapter.MyView
 
     }
 
-    private void initView(SinhVien sv, MyViewHolder holder) {
+    private void initView(B17DCCN528_GiangVien sv, MyViewHolder holder) {
         holder.tvTen.setText(sv.getTen());
-        holder.tvNam.setText(""+sv.getNam());
-        holder.tvQueQuan.setText(sv.getQuequan());
-        holder.tvNamHoc.setText("Năm học: "+sv.getNamhoc());
+        holder.tvNam.setText(""+sv.getId());
+        holder.tvQueQuan.setText(sv.getTrinhDo());
+        holder.tvNamHoc.setText("KN: "+sv.getSoNamKN());
     }
 
     @Override
@@ -72,7 +71,7 @@ public class SinhVienAdapter extends RecyclerView.Adapter<SinhVienAdapter.MyView
     }
 
     public interface AdapterCallBack{
-        void setOnClickItem(View view, SinhVien sinhVien);
+        void setOnClickItem(View view, B17DCCN528_GiangVien sinhVien);
     }
 
 

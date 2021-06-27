@@ -9,16 +9,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ptit.testmad.model.Lop;
+
 import com.ptit.testmad.R;
+import com.ptit.testmad.model.B17DCCN528_ChuyenMon;
 
 import java.util.List;
 
 public class LopAdapter extends RecyclerView.Adapter<LopAdapter.MyViewHolder> {
     private Context context;
-    private List<Lop> list;
+    private List<B17DCCN528_ChuyenMon> list;
     private AdapterLopCallBack callBack;
-    public LopAdapter(List<Lop> list, Context context, AdapterLopCallBack callBack) {
+    public LopAdapter(List<B17DCCN528_ChuyenMon> list, Context context, AdapterLopCallBack callBack) {
         this.context = context;
         this.list = list;
         this.callBack=callBack;
@@ -33,7 +34,7 @@ public class LopAdapter extends RecyclerView.Adapter<LopAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        Lop lop = list.get(position);
+        B17DCCN528_ChuyenMon lop = list.get(position);
         initView(lop, holder);
 
         holder.itemView.setOnClickListener(view->{
@@ -41,8 +42,8 @@ public class LopAdapter extends RecyclerView.Adapter<LopAdapter.MyViewHolder> {
         });
     }
 
-    private void initView(Lop lop, MyViewHolder holder) {
-        holder.tvTen.setText(lop.getTenLop());
+    private void initView(B17DCCN528_ChuyenMon lop, MyViewHolder holder) {
+        holder.tvTen.setText(lop.getTen());
         holder.tvMOta.setText(""+lop.getMoTa());
 
     }
@@ -65,7 +66,7 @@ public class LopAdapter extends RecyclerView.Adapter<LopAdapter.MyViewHolder> {
     }
 
     public interface AdapterLopCallBack{
-        void setOnClickItem(View view, Lop lop);
+        void setOnClickItem(View view, B17DCCN528_ChuyenMon lop);
     }
 
 }

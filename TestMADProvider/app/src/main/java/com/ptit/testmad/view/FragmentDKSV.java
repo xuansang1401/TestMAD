@@ -1,5 +1,7 @@
 package com.ptit.testmad.view;
 
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,14 +10,15 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+
 import com.ptit.testmad.MainActivity;
 import com.ptit.testmad.adapter.SinhVienAdapter;
 import com.ptit.testmad.databinding.DssvFrgamentBinding;
 import com.ptit.testmad.db.DatabaseHelper;
-import com.ptit.testmad.model.Lop;
-import com.ptit.testmad.model.SinhVien;
+import com.ptit.testmad.db.SinhVienProvider;
+import com.ptit.testmad.model.B17DCCN528_ChuyenMon;
+import com.ptit.testmad.model.B17DCCN528_GiangVien;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentDKSV extends Fragment implements SinhVienAdapter.AdapterCallBack {
@@ -23,8 +26,8 @@ public class FragmentDKSV extends Fragment implements SinhVienAdapter.AdapterCal
     private DssvFrgamentBinding binding;
     private DatabaseHelper databaseHelper;
     private MainActivity mainActivity;
-    private Lop lop;
-    public FragmentDKSV(DatabaseHelper databaseHelper, MainActivity mainActivity, Lop lop) {
+    private B17DCCN528_ChuyenMon lop;
+    public FragmentDKSV(DatabaseHelper databaseHelper, MainActivity mainActivity, B17DCCN528_ChuyenMon lop) {
         this.databaseHelper=databaseHelper;
         this.mainActivity=mainActivity;
         this.lop=lop;
@@ -41,7 +44,9 @@ public class FragmentDKSV extends Fragment implements SinhVienAdapter.AdapterCal
 
     private void initView() {
         mainActivity.setTitleActivity("Danh Sach Sinh Vien");
-        List<SinhVien> list=databaseHelper.getSVByLop(lop.getIdLop());
+        Cursor c2=getContext().getContentResolver().query(Uri.parse(SinhVienProvider.URI3),null, databaseHelper.getGVByCM(lop.getId()), null,null);
+
+        List<B17DCCN528_GiangVien> list=databaseHelper.getListTable1(c2);
         if (list.isEmpty()){
             return;
         }
@@ -50,6 +55,6 @@ public class FragmentDKSV extends Fragment implements SinhVienAdapter.AdapterCal
     }
 
     @Override
-    public void setOnClickItem(View view, SinhVien sinhVien) {
+    public void setOnClickItem(View view, B17DCCN528_GiangVien sinhVien) {
     }
 }

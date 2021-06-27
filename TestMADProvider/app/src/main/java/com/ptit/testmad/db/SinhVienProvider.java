@@ -10,20 +10,28 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.ptit.testmad.model.SinhVien;
-
-import java.util.HashMap;
-
 public class SinhVienProvider extends ContentProvider {
     private SQLiteDatabase db;
-    static final String PROVIDER_NAME = "com.example.provider.College";
-    static final String URI = "content://" + PROVIDER_NAME + "/students";
-    public static final Uri CONTENT_URI = Uri.parse(URI);
 
+    public static final String PROVIDER_NAME = "com.example.provider.College";
+    public static final String URI1 = "content://" + PROVIDER_NAME + "/"+ DatabaseHelper.TABLE_1;
+    public static final String URI2 = "content://" + PROVIDER_NAME + "/"+ DatabaseHelper.TABLE_2;
+    public static final String URI3 = "content://" + PROVIDER_NAME + "/"+ DatabaseHelper.TABLE_3;
+    static final int ID_TA1 = 1;
+    static final int ID_TA2 = 2;
+    static final int ID_TA3 = 3;
+    static final UriMatcher uriMatcher;
+    static{
+        uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+        uriMatcher.addURI(PROVIDER_NAME, DatabaseHelper.TABLE_1, ID_TA1);
+        uriMatcher.addURI(PROVIDER_NAME, DatabaseHelper.TABLE_2, ID_TA2);
+        uriMatcher.addURI(PROVIDER_NAME, DatabaseHelper.TABLE_3, ID_TA3);
+    }
     @Override
     public boolean onCreate() {
         Context context = getContext();
@@ -35,8 +43,8 @@ public class SinhVienProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        qb.setTables(DatabaseHelper.TABLE_NAME);
+//        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+//        qb.setTables(DatabaseHelper.TABLE_NAME);
 
         Cursor c = db.rawQuery(selection, null);
 //        Cursor c = qb.query(db, projection, selection, selectionArgs, null, null, sortOrder);
@@ -53,13 +61,32 @@ public class SinhVienProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-        long rowID = db.insert("SinhVien", "", values);
-        if(rowID > 0){
-            Uri _uri = ContentUris.withAppendedId(CONTENT_URI, rowID);
-            getContext().getContentResolver().notifyChange(_uri, null);
-            return _uri;
+        long rowID=-1;
+        Uri _uri= null;
+        switch (uriMatcher.match(uri)){
+            case ID_TA1:
+                rowID = db.insert(DatabaseHelper.TABLE_1, "", values);
+                if (rowID>=0){
+                    _uri = ContentUris.withAppendedId(Uri.parse(URI1), rowID);
+                }
+                break;
+            case ID_TA2:
+                rowID = db.insert(DatabaseHelper.TABLE_2, "", values);
+                if (rowID>=0) {
+                    _uri = ContentUris.withAppendedId(Uri.parse(URI2), rowID);
+                }
+                break;
+            case ID_TA3:
+                rowID = db.insert(DatabaseHelper.TABLE_3, "", values);
+                if (rowID>=0){
+                    _uri = ContentUris.withAppendedId(Uri.parse(URI3), rowID);
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown URI " + uri);
         }
-        throw new SQLException("Failed to add a record into " + uri);
+        getContext().getContentResolver().notifyChange(_uri, null);
+        return _uri;
     }
 
     @Override

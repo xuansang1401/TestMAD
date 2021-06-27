@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.ptit.testmad.model.DangKi;
+import com.ptit.testmad.model.B17DCCN527_DangKi;
 import com.ptit.testmad.model.Lop;
 import com.ptit.testmad.model.SinhVien;
 
@@ -217,7 +217,7 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
         List<Lop> list = getListLop(selectQuery);
         return list;
     }
-    public void addDangKy(DangKi dangKi) {
+    public void addDangKy(B17DCCN527_DangKi dangKi) {
         String query = "INSERT INTO DANGKY (id,idLop,kihoc,stc)\n" +
                 "VALUES ('" + dangKi.getIdSV() + "'" +
                 ", '" + dangKi.getIdLop() + "', '" + dangKi.getKihoc() + "', '" + dangKi.getStc() + "');";

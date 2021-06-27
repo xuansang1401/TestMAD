@@ -45,8 +45,11 @@ public class LopFragment extends Fragment {
                     mainActivity.showToast("Not null");
                     return;
                 }
-
-                Lop lop=  new Lop(ten, mota);
+                int id=0;
+                if (databaseHelper.getAllLop()!= null){
+                    id=databaseHelper.getAllLop().length;
+                }
+                Lop lop=  new Lop(id,ten, mota);
                 databaseHelper.addLop(lop.toString());
                 mainActivity.showToast("THEM LOP THANH CONG");
             }

@@ -18,12 +18,6 @@ public class SinhVien {
         this.namhoc = namhoc;
     }
 
-    public SinhVien(String ten, int nam, String quequan, int namhoc) {
-        this.ten = ten;
-        this.nam = nam;
-        this.quequan = quequan;
-        this.namhoc = namhoc;
-    }
 
     public int getId() {
         return id;

@@ -71,11 +71,11 @@ public class DangKi {
 
 
     public String toString() {
-        return idSV+"_"+idLop+"_"+tenSv+"_"+tenLop+"_"+stc+"_"+kihoc+";";
+        return idSV+"_"+idLop+"_"+stc+"_"+kihoc+"_"+tenSv+"_"+tenLop+";";
     }
 
     public String toStringLop() {
-        return idLop+"_"+"_"+tenLop+"_"+stc+"_"+kihoc+";";
+        return idLop+"_"+tenLop+"_"+stc+"_"+kihoc+";";
     }
     public String toStringSinhVien() {
         return idSV+"_"+tenSv+"_"+"_"+stc+"_"+kihoc+";";

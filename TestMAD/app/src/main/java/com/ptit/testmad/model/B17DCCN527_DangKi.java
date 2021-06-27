@@ -1,13 +1,13 @@
 package com.ptit.testmad.model;
 
-public class DangKi {
+public class B17DCCN527_DangKi {
     private int id;
     private int idLop;
     private int idSV;
     private int kihoc;
     private int stc;
 
-    public DangKi(int id, int idLop, int idSV, int kihoc, int stc) {
+    public B17DCCN527_DangKi(int id, int idLop, int idSV, int kihoc, int stc) {
         this.id = id;
         this.idLop = idLop;
         this.idSV = idSV;
@@ -15,14 +15,14 @@ public class DangKi {
         this.stc = stc;
     }
 
-    public DangKi(int idLop, int idSV, int kihoc, int stc) {
+    public B17DCCN527_DangKi(int idLop, int idSV, int kihoc, int stc) {
         this.idLop = idLop;
         this.idSV = idSV;
         this.kihoc = kihoc;
         this.stc = stc;
     }
 
-    public DangKi() {
+    public B17DCCN527_DangKi() {
     }
 
     public int getId() {

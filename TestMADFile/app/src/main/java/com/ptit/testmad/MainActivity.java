@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         setTitleActivity("Trang chủ");
     }
 
-    //1 activity nh fragment do ac quan ly
     private void addMainFragment() {
         MainFragment mainFragment = new MainFragment(databaseHelper, this);
         getSupportFragmentManager().beginTransaction()
@@ -75,12 +74,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addDKLopFragment(SinhVien sinhVien) {
-        DKLopFragment fragment = new DKLopFragment(databaseHelper, this,sinhVien);
+        DKLopFragment fragment = new DKLopFragment(fileManager, this,sinhVien);
         replaceFragment(fragment);
     }
 
     public void addDKSVFragment(Lop lop) {
-        FragmentDKSV fragment = new FragmentDKSV(databaseHelper, this,lop);
+        FragmentDKSV fragment = new FragmentDKSV(fileManager, this,lop);
         replaceFragment(fragment);
     }
 

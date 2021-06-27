@@ -1,7 +1,6 @@
 package com.ptit.testmad.view;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +11,8 @@ import androidx.fragment.app.Fragment;
 
 import com.ptit.testmad.MainActivity;
 import com.ptit.testmad.databinding.FragmentDangkyBinding;
-import com.ptit.testmad.databinding.FragmentLopBinding;
 import com.ptit.testmad.db.DatabaseHelper;
-import com.ptit.testmad.model.DangKi;
+import com.ptit.testmad.model.B17DCCN527_DangKi;
 import com.ptit.testmad.model.Lop;
 import com.ptit.testmad.model.SinhVien;
 
@@ -95,7 +93,7 @@ public class DangKiFragment extends Fragment implements AdapterView.OnItemSelect
                     return;
                 };
 
-                DangKi dangKi= new DangKi(idLop,  idSV, Integer.parseInt(kihoc) , Integer.parseInt(stc)) ;
+                B17DCCN527_DangKi dangKi= new B17DCCN527_DangKi(idLop,  idSV, Integer.parseInt(kihoc) , Integer.parseInt(stc)) ;
 //                Log.e("Sang", "id: "+l+ ";name: " +id);
                 databaseHelper.addDangKy(dangKi);
                 mainActivity.showToast("DANG KI THANH CONG");

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,18 +14,19 @@ import com.ptit.testmad.adapter.LopAdapter;
 import com.ptit.testmad.databinding.DsLopFrgamentBinding;
 import com.ptit.testmad.databinding.FrgamentDkLopBinding;
 import com.ptit.testmad.db.DatabaseHelper;
+import com.ptit.testmad.db.FileManager;
 import com.ptit.testmad.model.Lop;
 import com.ptit.testmad.model.SinhVien;
 
 import java.util.List;
 
-public class DKLopFragment extends Fragment implements LopAdapter.AdapterLopCallBack {
+public class DKLopFragment extends Fragment  {
 
     private FrgamentDkLopBinding binding;
-    private DatabaseHelper databaseHelper;
+    private FileManager databaseHelper;
     private MainActivity mainActivity;
     private SinhVien sinhVien;
-    public DKLopFragment(DatabaseHelper databaseHelper, MainActivity mainActivity, SinhVien sinhVien) {
+    public DKLopFragment(FileManager databaseHelper, MainActivity mainActivity, SinhVien sinhVien) {
         this.databaseHelper=databaseHelper;
         this.mainActivity=mainActivity;
         this.sinhVien=sinhVien;
@@ -40,14 +42,11 @@ public class DKLopFragment extends Fragment implements LopAdapter.AdapterLopCall
     }
 
     private void initView() {
-        mainActivity.setTitleActivity(sinhVien.getId()+"_"+sinhVien.getTen());
-        List<Lop> list= databaseHelper.getAllLopByIdSV(sinhVien.getId());
-        binding.rcvLopDk.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.rcvLopDk.setAdapter(new LopAdapter(list,getContext(), this));
+        List<String> list=databaseHelper.getListLopBySV(sinhVien.getId());
+        if (list== null) return;
+        ArrayAdapter<String> adapter1 = new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1,list);
+
+        binding.rcvLopDk.setAdapter(adapter1);
     }
 
-    @Override
-    public void setOnClickItem(View view, Lop lop) {
-
-    }
 }

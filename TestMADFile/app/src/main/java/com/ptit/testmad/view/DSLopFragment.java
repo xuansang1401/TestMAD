@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import androidx.fragment.app.Fragment;
@@ -57,12 +58,20 @@ public class DSLopFragment extends Fragment {
 
         String[] list= databaseHelper.getAllLop();
         if (list== null) return;
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,list);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1,list);
         //lươt dọc xuống
 //        binding.rcvSv.setLayoutManager(new LinearLayoutManager(getContext()));
 //        binding.rcvSv.setAdapter(new SinhVienAdapter(list,getContext(), this));
         binding.rcvLop.setAdapter(adapter1);
 
+        binding.rcvLop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String s= list[position];
+                Lop lop=databaseHelper.stringToLop(s);
+                mainActivity.addDKSVFragment(lop);
+            }
+        });
     }
 
 

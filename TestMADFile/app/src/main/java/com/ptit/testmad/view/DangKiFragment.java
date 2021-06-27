@@ -56,8 +56,6 @@ public class DangKiFragment extends Fragment implements AdapterView.OnItemSelect
         binding.spinnerSv.setAdapter(adapter1);
         //Lop
 
-
-
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,lops);
 
         adapter2.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);

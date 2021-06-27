@@ -59,22 +59,18 @@ public class DSSVFragment extends Fragment{
             return;
         }
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,list);
-        //lươt dọc xuống
-//        binding.rcvSv.setLayoutManager(new LinearLayoutManager(getContext()));
-//        binding.rcvSv.setAdapter(new SinhVienAdapter(list,getContext(), this));
+
         binding.rcvSv.setAdapter(adapter1);
 
         binding.rcvSv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("Sang", "text: "+parent.toString()+"; pos: "+position);
+                SinhVien sinhVien= databaseHelper.stringToSV(list[position]);
+                mainActivity.addDKLopFragment(sinhVien);
             }
         });
     }
 
 
-//    @Override
-//    public void setOnClickItem(View view, SinhVien sinhVien) {
-//        mainActivity.addDKLopFragment(sinhVien);
-//    }
 }

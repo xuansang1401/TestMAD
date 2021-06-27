@@ -22,7 +22,7 @@ public class SinhVienProvider extends ContentProvider {
     private SQLiteDatabase db;
     static final String PROVIDER_NAME = "com.example.provider.College";
     static final String URI = "content://" + PROVIDER_NAME + "/students";
-   public static final Uri CONTENT_URI = Uri.parse(URI);
+    public static final Uri CONTENT_URI = Uri.parse(URI);
 
     @Override
     public boolean onCreate() {
